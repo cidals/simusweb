@@ -21,7 +21,7 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = User::all();
+        $users = User::where('role_id', '=', 2)->get();
         return view('users', ['users' => $users]);
     }
 
@@ -43,6 +43,13 @@ class UserController extends Controller
         ]));
     
         return redirect('users')->with('status', 'User baru sukses ditambahkan');
+    }
+
+    public function show($slug)
+    {
+        $user = User::where('slug', $slug)->first();
+
+        return view('user-show', ['user' => $user]);
     }
 
     public function edit($slug)
@@ -67,5 +74,42 @@ class UserController extends Controller
         ]));
         
         return redirect('users')->with('status', 'User baru berhasil diubah');
+    }
+
+    public function delete($slug)
+    {
+        $user = User::where('slug', $slug)->first();
+        
+        return view('user-delete', ['user' => $user]);
+    }
+
+    public function destroy($slug)
+    {
+        $user = User::where('slug', $slug)->first();
+        $user->delete();
+
+        return redirect('users')->with('status', 'User berhasil dihapus');
+    }
+
+    public function deleteduser()
+    {
+        $user = User::onlyTrashed()->get();
+        
+        return view('user-deleted-list', ['user' => $user]);
+    }
+
+    public function restore($slug)
+    {
+        $user = User::onlyTrashed('slug', $slug)->first();
+        $user->restore();
+        
+        return back()->with('status', 'User berhasil dikembalikan');
+    }
+
+    public function restoreAll()
+    {
+        $user = User::onlyTrashed()->restore();
+
+        return redirect('users')->with('status', 'Semua User berhasil dikembalikan');
     }
 }

@@ -19,7 +19,7 @@ class OnlyGuest
     {
         if(Auth::user()) 
         {
-            return redirect('/datas');
+            return redirect('/');
         }
         return $next($request);
     }

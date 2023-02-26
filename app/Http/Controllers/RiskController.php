@@ -11,6 +11,13 @@ class RiskController extends Controller
     public function index()
     {
         $risks = Risk::all();
-        return view('risk', ['risks' => $risks]);
+        return view('risks', ['risks' => $risks]);
+    }
+
+    public function show($slug)
+    {
+        $risk = Risk::where('slug', $slug)->first();
+
+        return view('risk-show', ['risk' => $risk]);
     }
 }

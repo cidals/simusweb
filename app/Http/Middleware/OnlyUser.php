@@ -19,7 +19,7 @@ class OnlyUser
     {
         if(Auth::user()->role_id != 2) 
         {
-            return redirect('/datas');
+            return redirect('/');
         }
         return $next($request);
     }

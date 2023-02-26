@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', 'Tingkat Risiko')
+@section('title', 'Tingkat Resiko')
 
 @section('content')
 <h1>@yield('title') </h1>
@@ -22,7 +22,7 @@
                 <td>{{ $item->name }}</td>
                 <td>{{ $item->description }}</td>
                 <td>
-                    <a href="#"><i class="bi bi-eye btn btn-warning"></i></a>
+                    <a href="risk-show/{{ $item->slug }}"><i class="bi bi-eye btn btn-warning"></i></a>
                 </td>
                 </tr>
                 @endforeach
