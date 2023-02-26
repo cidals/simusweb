@@ -1,0 +1,35 @@
+body{
+  background: #00E5FF;
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+}
+
+.main {
+  height: 100vh;
+  box-sizing :border-box;  
+}
+
+.login-box {
+  max-width: 500px;
+  padding: 20px;
+  border: solid 1px;
+}
+
+hr {
+  margin: 1rem 0;
+  color:mediumblue;
+  background-color: currentColor;
+  border: 1;
+  opacity: 0.25;
+}
+
+
+form div a {
+  margin-bottom:10px;  
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;  
+  position:relative;
+  text-decoration: none;
+  outline: none;
+  text-align: center;
+}
