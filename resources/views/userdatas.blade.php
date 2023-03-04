@@ -101,13 +101,6 @@
                             <td>{{ $item->date_input }}</td>
                         </tr>
                     @endforeach
-                    <tr>
-                        <td colspan="8" style="text-align:left; font-weight:700"> Total Data</td>
-
-                        <td>{{ $total_data }}</td>
-
-                    </tr>
-
                 </tbody>
             </table>
         </div>
