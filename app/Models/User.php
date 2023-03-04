@@ -63,7 +63,11 @@ class User extends Authenticatable
     ];
 
     protected $attributes = [
-        'role_id' => 2,
-        
+        'role_id' => 2,   
     ];
+
+    public function datas()
+    {
+        return $this->hasMany(Data::class);
+    }
 }

@@ -4,7 +4,7 @@
 
 @section('content')
 
-<h1>Halaman, {{ Auth::user()->username }}</h1>
+<h1>Halaman {{ Auth::user()->username }}</h1>
 <hr>
     <div class="row mt-5">
         <div class="col-lg-4">

@@ -6,8 +6,10 @@ use App\Http\Controllers\DataController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RiskController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\DataInController;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UserDatasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +39,8 @@ Route::middleware('auth')->group(function(){
         Route::get('risks', [RiskController::class, 'index']);
         Route::get('risk-show/{slug}', [RiskController::class, 'show']);
 
+        Route::get('datas', [DataController::class, 'index']);
+
         Route::get('users', [UserController::class, 'index']);
         Route::get('user-add', [UserController::class, 'add']);
         Route::post('user-add', [UserController::class, 'store']);
@@ -48,14 +52,17 @@ Route::middleware('auth')->group(function(){
         Route::get('user-deleted', [UserController::class, 'deleteduser']);
         Route::get('user-restore/{slug}', [UserController::class, 'restore']);
         Route::get('user-restoreall', [UserController::class, 'restoreAll']);
+
     });
-    
-    Route::get('profile', [UserController::class, 'profile'])->middleware('only_user');
-    
-    Route::get('datas', [DataController::class, 'index']);
+});
+Route::middleware('auth')->group(function(){
+    Route::middleware('only_user')->group(function(){
+        Route::get('profile', [UserController::class, 'profile']);
+        Route::get('userdatas', [UserDatasController::class, 'index']);
+        Route::get('userdatas/filter', [UserDatasController::class, 'filter']);
 
-    Route::get('logout', [AuthController::class, 'logout' ]);
-
+    });
 });
 
-    
+
+Route::get('logout', [AuthController::class, 'logout' ]);
