@@ -39,7 +39,9 @@ Route::middleware('auth')->group(function(){
         Route::get('risks', [RiskController::class, 'index']);
         Route::get('risk-show/{slug}', [RiskController::class, 'show']);
 
-        Route::get('datas', [DataController::class, 'index']);
+        Route::get('admindatas', [DataController::class, 'index']);
+        Route::get('admindatas/filter', [DataController::class, 'filter']);
+
 
         Route::get('users', [UserController::class, 'index']);
         Route::get('user-add', [UserController::class, 'add']);
@@ -57,10 +59,17 @@ Route::middleware('auth')->group(function(){
 });
 Route::middleware('auth')->group(function(){
     Route::middleware('only_user')->group(function(){
-        Route::get('profile', [UserController::class, 'profile']);
+        Route::get('profile/{slug}', [UserController::class, 'profile']);
         Route::get('userdatas', [UserDatasController::class, 'index']);
-        Route::get('userdatas/filter', [UserDatasController::class, 'filter']);
 
+        Route::get('userdatas/filter', [UserDatasController::class, 'filter']);
+        Route::get('userdatas-add', [UserDatasController::class, 'add']);
+        Route::post('userdatas-add', [UserDatasController::class, 'store']);
+        Route::get('userdatas-pdf', [UserDatasController::class, 'printpdfall']);
+        Route::get('userdatas-form', [UserDatasController::class, 'print']);
+        Route::get('userdatas-tanggal/{tglawal}/{tglakhir}', [UserDatasController::class, 'pertanggal']);
+        Route::get('userdatas-nameform', [UserDatasController::class, 'printname']);
+        Route::get('userdatas-pername/{risk_id}', [UserDatasController::class, 'pername']);
     });
 });
 
