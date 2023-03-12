@@ -1,49 +1,26 @@
 @extends('layouts.main')
 
-@section('title', 'Dashboard')
+@section('title', 'All Data')
 
 @section('content')
-
-    <h1>Halaman {{ Auth::user()->username }}</h1>
-    <hr>
-    <div class="row mt-5">
-        <div class="col-lg-4">
-            <div class="card-data data">
-                <div class="row">
-                    <div class="col-6"><i class="bi bi-database-fill"></i></div>
-                    <div class="col-6 d-flex flex-column justify-content-center align-items-end">
-                        <div class="card-desc">DATA</div>
-                        <div class="card-count">{{ $data_count }}</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <div class="card-data risiko">
-                <div class="row">
-                    <div class="col-6"><i class="bi bi-ladder"></i></div>
-                    <div class="col-6 d-flex flex-column justify-content-center align-items-end">
-                        <div class="card-desc">RISIKO</div>
-                        <div class="card-count">{{ $risk_count }}</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <div class="card-data user">
-                <div class="row">
-                    <div class="col-6"><i class="bi bi-people"></i></div>
-                    <div class="col-6 d-flex flex-column justify-content-center align-items-end">
-                        <div class="card-desc">USERS</div>
-                        <div class="card-count">{{ $user_count }}</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    <h1>Data {{ Auth::user()->username }} </h1>
+    <hr class="featurette-divider">
     <div class="mt-5">
-        <h2>#Data</h2>
+        <h2>All Data</h2>
+
+        <div>
+            <form class=" ms-2 col-md-10-center" action="/admindatas/filter" method="GET">
+                @csrf
+                <div class="input-group mt-5 ">
+                    <input class="form-control me-md-3" id="tglawal" name="tglawal" type="date">
+                    <input class="form-control me-md-3" id="tglahir" name="tglakhir" type="date">
+                    <div class="input-group-btn">
+                        <button type="submit" class="btn btn-primary me-2">Search</button>
+                        <a href="/admindatas" class="btn btn-warning me-2"><i class="bi bi-arrow-counterclockwise"></i>
+                            Back</a>
+                    </div>
+            </form>
+        </div>
         <table class="table table-striped mt-5">
             <thead>
                 <tr>

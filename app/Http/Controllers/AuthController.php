@@ -23,7 +23,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             // ketika tidak aktif
-            
+
             if(!in_array(Auth::user()->role_id, [1, 2]))
             {
                 Auth::logout();
@@ -42,17 +42,17 @@ class AuthController extends Controller
             }
             if(Auth::user()->role_id == 2)
             {
-                
-                return redirect('/profile');
+
+                return redirect('/userdatas');
             }
-            
-           
+
+
         }
         Session::flash('status', 'failed');
         Session::flash('message', 'Login Invalid');
         return redirect('/login');
     }
-    
+
     public function logout(Request $request)
     {
         Auth::logout();

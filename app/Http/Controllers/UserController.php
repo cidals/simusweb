@@ -12,10 +12,10 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function profile()
+    public function profile($slug)
     {
-        // dd('Ini Halaman Profie User');
-        return view('profile');
+        $user = User::where('slug', $slug)->first();
+        return view('profile', ['user' => $user]);
         //dd(Auth::user());
     }
 
@@ -41,7 +41,7 @@ class UserController extends Controller
         $user = User::create(array_merge($request->only('name', 'username', 'address'),[
             'password' => Hash::make($request->password)
         ]));
-    
+
         return redirect('users')->with('status', 'User baru sukses ditambahkan');
     }
 
@@ -56,7 +56,7 @@ class UserController extends Controller
     {
         $user = User::where('slug', $slug)->first();
 
-        return view('user-edit', ['user' => $user]);           
+        return view('user-edit', ['user' => $user]);
     }
 
     public function update(Request $request, $slug)
@@ -72,14 +72,14 @@ class UserController extends Controller
         $user->update(array_merge($request->only('name', 'username', 'address'),[
             'password' => Hash::make($request->password)
         ]));
-        
+
         return redirect('users')->with('status', 'User baru berhasil diubah');
     }
 
     public function delete($slug)
     {
         $user = User::where('slug', $slug)->first();
-        
+
         return view('user-delete', ['user' => $user]);
     }
 
@@ -94,7 +94,7 @@ class UserController extends Controller
     public function deleteduser()
     {
         $user = User::onlyTrashed()->get();
-        
+
         return view('user-deleted-list', ['user' => $user]);
     }
 
@@ -102,7 +102,7 @@ class UserController extends Controller
     {
         $user = User::onlyTrashed('slug', $slug)->first();
         $user->restore();
-        
+
         return back()->with('status', 'User berhasil dikembalikan');
     }
 
